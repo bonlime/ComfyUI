@@ -3,7 +3,41 @@ name = "ComfyUI"
 version = "0.8.2"
 readme = "README.md"
 license = { file = "LICENSE" }
-requires-python = ">=3.10"
+requires-python = "==3.13.*"
+dependencies = [
+  "comfyui-frontend-package==1.35.9",
+  "comfyui-workflow-templates==0.7.69",
+  "comfyui-embedded-docs==0.3.1",
+  "torch",
+  "torchsde",
+  "torchvision",
+  "torchaudio",
+  "numpy>=1.25.0",
+  "einops",
+  "transformers>=4.50.3",
+  "tokenizers>=0.13.3",
+  "sentencepiece",
+  "safetensors>=0.4.2",
+  "aiohttp>=3.11.8",
+  "yarl>=1.18.0",
+  "pyyaml",
+  "Pillow",
+  "scipy",
+  "tqdm",
+  "psutil",
+  "alembic",
+  "SQLAlchemy",
+  "av>=14.2.0",
+  "comfy-kitchen>=0.2.5",
+  #non essential dependencies:
+  "kornia>=0.7.1",
+  "spandrel",
+  "pydantic~=2.0",
+  "pydantic-settings~=2.0",
+  # requires building from source
+  "sageattention",
+  "flash-attn",
+]
 
 [project.urls]
 homepage = "https://www.comfy.org/"
@@ -73,3 +107,20 @@ messages_control.disable = [
   "no-else-return",
   "unused-variable",
 ]
+
+[[tool.uv.index]]
+name = "pytorch-cu130-nightly"
+url = "https://download.pytorch.org/whl/nightly/cu130"
+# explicit = true # with this options it fails to resolve
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cu130-nightly"}]
+torchvision = [{ index = "pytorch-cu130-nightly"}]
+sageattention = [{ git = "https://github.com/thu-ml/SageAttention.git"}]
+flash-attn = [{ git = "https://github.com/Dao-AILab/flash-attention.git"}]
+
+[tool.uv]
+prerelease = "allow"
+no-build-isolation = true
+required-environments = ["sys_platform == 'linux'"]
+index-strategy = "unsafe-best-match"
