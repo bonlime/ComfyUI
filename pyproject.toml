@@ -36,7 +36,8 @@ dependencies = [
   "pydantic-settings~=2.0",
   # requires building from source
   "sageattention",
-  "flash-attn",
+  "flash-attn", # FA2
+  # "flash-attn-interface", # FA3
 ]
 
 [project.urls]
@@ -118,6 +119,7 @@ torch = [{ index = "pytorch-cu130-nightly"}]
 torchvision = [{ index = "pytorch-cu130-nightly"}]
 sageattention = [{ git = "https://github.com/thu-ml/SageAttention.git"}]
 flash-attn = [{ git = "https://github.com/Dao-AILab/flash-attention.git"}]
+flash-attn-interface = [{ git = "https://github.com/Dao-AILab/flash-attention.git"}]
 
 [tool.uv]
 prerelease = "allow"
